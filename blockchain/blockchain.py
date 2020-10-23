@@ -1,6 +1,5 @@
 from block import Block
-import time
-from hashlib import sha256
+from vote import Vote
 class Blockchain:
     """
     This is the blockchain ledger class.
@@ -24,7 +23,8 @@ class Blockchain:
 
 
 if __name__ == '__main__':
-    blockchain = Blockchain()
-    blockchain.addBlock(data='1')
-    blockchain.addBlock(data='2')
-    print(blockchain)
+    # blockchain = Blockchain()
+    # blockchain.addBlock(data=[Vote('1','a'),Vote('1','b')])
+    # blockchain.addBlock(data=[Vote('1','b'),Vote('1','a')])
+    # print(blockchain)
+    print(Vote('1','2').__dict__)
