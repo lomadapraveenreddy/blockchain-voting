@@ -1,5 +1,6 @@
 from block import Block
 import time
+from hashlib import sha256
 class Blockchain:
     """
     This is the blockchain ledger class.
@@ -11,16 +12,11 @@ class Blockchain:
         this method adds a block to the ledger having the data.
         data is usually the list of votes casted.
         """
-        self.ledger.append(Block(
-            timestamp=time.time(),
-            data=data,
-            hash=f'{time.time()}',
-            previousHash=self.ledger[-1].hash
-        ))
+        self.ledger.append(Block.mineBlock(self.ledger[-1],data))
 
     def __init__(self):
-        self.ledger =[]
-        self.ledger.append(Block.genesisBlock())
+        self.ledger =[Block.genesisBlock()]
+        
 
 
     def __repr__(self):
