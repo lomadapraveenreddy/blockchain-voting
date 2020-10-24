@@ -26,5 +26,10 @@ if __name__ == '__main__':
     blockchain = Blockchain()
     blockchain.addBlock(data=[Vote('1','a').__dict__,Vote('1','b').__dict__])
     blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
+    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
+    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
+    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
+    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
+    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
     print(blockchain)
-    #print(Vote('1','2').__dict__)
+    

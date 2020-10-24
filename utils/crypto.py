@@ -1,13 +1,14 @@
 import json
 from hashlib import sha256
 from blockchain.vote import Vote
+from utils.hex_to_bin import hexToBinary
 def sha256Hash(*args):
     """
     return sha256 of the given data.
     """
     jsonList = map(lambda x: json.dumps(x), args)
     jsonString = ''.join(sorted(jsonList))
-    return sha256(jsonString.encode('utf-8')).hexdigest()
+    return hexToBinary(sha256(jsonString.encode('utf-8')).hexdigest())
 
 if __name__ == '__main__':
 
