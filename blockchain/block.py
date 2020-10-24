@@ -1,5 +1,11 @@
 import time
 from utils.crypto import sha256Hash
+GENESIS_DATA ={
+    'timestamp': 1,
+    'data': [],
+    'hash': 'genesisHash',
+    'previousHash':''
+}
 class Block:
     """
     This is a block class which stores the information
@@ -8,7 +14,7 @@ class Block:
 
     @staticmethod
     def genesisBlock():
-        return Block(timestamp=time.time_ns(),data=[],hash='genesisHash',previousHash='')
+        return Block(**GENESIS_DATA)
     
     @staticmethod
     def mineBlock(lastBlock,data):
@@ -37,4 +43,5 @@ class Block:
 if __name__ == '__main__':
     block = Block('1','2','3','4')
     print(block)
+    print(Block.genesisBlock())
     print(Block.mineBlock(lastBlock=block,data=[1,'a']))
