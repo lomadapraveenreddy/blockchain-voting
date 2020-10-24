@@ -1,5 +1,6 @@
 import time
 from utils.crypto import sha256Hash
+from blockchain.vote import Vote
 class Block:
     """
     This is a block class which stores the information
@@ -37,4 +38,4 @@ class Block:
 if __name__ == '__main__':
     block = Block('1','2','3','4')
     print(block)
-    print(Block.mineBlock(lastBlock=block,data=[1,'a']))
+    print(Block.mineBlock(lastBlock=block,data=[Vote('1','2').__dict__]))
