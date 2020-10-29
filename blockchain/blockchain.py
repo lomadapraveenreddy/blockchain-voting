@@ -1,5 +1,5 @@
-from block import Block
-from vote import Vote
+from blockchain.block import Block
+from blockchain.vote import Vote
 class Blockchain:
     """
     This is the blockchain ledger class.
