@@ -66,9 +66,29 @@ class Block:
         if lastBlock.difficulty-1>0:
             return lastBlock.difficulty-1
         return 1
+    
+    @staticmethod
+    def isValidBlock(lastBlock,block):
+        """
+        Checks if a block is valid or not.
+        """
+        if lastBlock.hash!=block.previousHash:
+            raise Exception("previous hash of this block\
+                 does not match with hash of previous block")
+        if block.hash[0:block.difficulty]!='0'*block.difficulty:
+            raise Exception("Proof of work mismatch")
+        if abs(block.difficulty-lastBlock.difficulty)>1:
+            raise Exception("difficulty change is more than 1")
+        if block.hash!=sha256Hash(block.timestamp,
+        block.data,
+        block.previousHash,
+        block.difficulty,
+        block.nonce):
+            raise Exception("Hash does not match")
 
 if __name__ == '__main__':
     print(Block.genesisBlock())
+    print(Block.isValidBlock(Block.genesisBlock(),Block.mineBlock(lastBlock=Block.genesisBlock(),data=[Vote('1','2').__dict__])))
     print(Block.mineBlock(lastBlock=Block.genesisBlock(),data=[Vote('1','2').__dict__]))
     
     
