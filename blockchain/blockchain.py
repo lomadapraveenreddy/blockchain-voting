@@ -31,7 +31,7 @@ class Blockchain:
 
         for i in range(1,len(ledger)):
            block = ledger[i]
-           lastblock = ledger[i-1]
+           lastBlock = ledger[i-1]
            Block.isValidBlock(lastBlock, block)
 
 
