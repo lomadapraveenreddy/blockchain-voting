@@ -11,6 +11,6 @@ def sha256Hash(*args):
     return hexToBinary(sha256(jsonString.encode('utf-8')).hexdigest())
 
 if __name__ == '__main__':
-
-    print(sha256Hash(Vote('1','2').__dict__,Vote('1','3').__dict__))
+    print(sha256Hash('foo'))
+    print(sha256Hash(1,[2],'three'))
     print(sha256Hash(Vote('1','3').__dict__,Vote('1','2').__dict__))
