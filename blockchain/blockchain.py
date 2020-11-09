@@ -1,5 +1,5 @@
-from block import Block
-from vote import Vote
+from blockchain.block import Block
+from blockchain.vote import Vote
 class Blockchain:
     """
     This is the blockchain ledger class.
@@ -23,8 +23,13 @@ class Blockchain:
 
 
 if __name__ == '__main__':
-    # blockchain = Blockchain()
-    # blockchain.addBlock(data=[Vote('1','a'),Vote('1','b')])
-    # blockchain.addBlock(data=[Vote('1','b'),Vote('1','a')])
-    # print(blockchain)
-    print(Vote('1','2').__dict__)
+    blockchain = Blockchain()
+    blockchain.addBlock(data=[Vote('1','a').__dict__,Vote('1','b').__dict__])
+    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
+    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
+    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
+    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
+    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
+    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
+    print(blockchain)
+    
