@@ -21,6 +21,23 @@ class Blockchain:
     def __repr__(self):
         return f'Ledger -\n {self.ledger}'
 
+    @staticmethod
+    def isValidLedger(ledger):
+        '''
+        validate the ledger
+        '''
+        if ledger[0]!=Block.genesisBlock():
+            raise Exception('genesis block must be valid')
+
+        for i in range(1,len(ledger)):
+           block = ledger[i]
+           lastblock = ledger[i-1]
+           Block.isValidBlock(lastBlock, block)
+
+
+
+
+
 
 if __name__ == '__main__':
     blockchain = Blockchain()

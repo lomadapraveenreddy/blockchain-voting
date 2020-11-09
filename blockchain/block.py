@@ -7,7 +7,7 @@ GENESIS_DATA ={
     'data': [],
     'hash': 'genesisHash',
     'previousHash':'',
-    'difficulty':4,
+    'difficulty':4, 
     'nonce': 'genesisNonce'
 }
 class Block:
@@ -55,6 +55,9 @@ class Block:
             f'nonce: {self.nonce})\n'
             )
 
+    def __eq__(self, other):
+        return self.__dict__==other.__dict__
+
     @staticmethod
     def getDifficulty(lastBlock,timestamp):
         """
@@ -75,10 +78,10 @@ class Block:
         if lastBlock.hash!=block.previousHash:
             raise Exception("previous hash of this block\
                  does not match with hash of previous block")
+        if abs(block.difficulty-lastBlock.difficulty)>1:
+            raise Exception("difficulty change is more than 1") 
         if block.hash[0:block.difficulty]!='0'*block.difficulty:
             raise Exception("Proof of work mismatch")
-        if abs(block.difficulty-lastBlock.difficulty)>1:
-            raise Exception("difficulty change is more than 1")
         if block.hash!=sha256Hash(block.timestamp,
         block.data,
         block.previousHash,
