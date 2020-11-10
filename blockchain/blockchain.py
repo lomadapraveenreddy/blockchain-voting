@@ -21,6 +21,20 @@ class Blockchain:
     def __repr__(self):
         return f'Ledger -\n {self.ledger}'
 
+    def replaceLedger(self, ledger):
+        '''
+        replace local ledger with incoming chains
+        '''
+        if len(ledger) <= len(self.ledger):
+            raise Exception('cannot replace. The incoming chain must be longer.')
+
+        try:
+            Blockchain.isValidLedger(ledger)
+        except Exception as e:
+            raise Exception(f'cannot replace. The incoming chain is invalid: {e}')
+
+        self.ledger = ledger
+
     @staticmethod
     def isValidLedger(ledger):
         '''
