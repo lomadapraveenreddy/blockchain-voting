@@ -22,10 +22,10 @@ def blockchain_three_blocks():
 
 
 def test_isValidLedger(blockchain_three_blocks):
-    Blockchain.isValidLedger(blockchain.ledger)
+    Blockchain.isValidLedger(blockchain_three_blocks.ledger)
 
 def test_isValidLedgerBadLedger(blockchain_three_blocks):
     blockchain_three_blocks.ledger[0].hash = 'bad_hash'
 
-    with pytest.raises(Exception, match='genesis block must be valid')
+    with pytest.raises(Exception, match='genesis block must be valid'):
         Blockchain.isValidLedger(blockchain_three_blocks.ledger)

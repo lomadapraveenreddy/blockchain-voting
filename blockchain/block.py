@@ -89,6 +89,12 @@ class Block:
         block.nonce):
             raise Exception("Hash does not match")
 
+    def toJson(self):
+        ''' 
+        Serializing the block class to
+        '''
+        return self.__dict__
+
 if __name__ == '__main__':
     print(Block.genesisBlock())
     print(Block.isValidBlock(Block.genesisBlock(),Block.mineBlock(lastBlock=Block.genesisBlock(),data=[Vote('1','2').__dict__])))

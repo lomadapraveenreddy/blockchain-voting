@@ -31,20 +31,22 @@ class Blockchain:
 
         for i in range(1,len(ledger)):
            block = ledger[i]
-           lastblock = ledger[i-1]
+           lastBlock = ledger[i-1]
            Block.isValidBlock(lastBlock, block)
 
+    def toJson(self):
+        '''
+        Serializing the blockchain class.
+        '''
+        jsonLedger = []
 
-
-
-
+        for block in self.ledger:
+            jsonLedger.append(block.toJson())
+        
+        return jsonLedger
 
 if __name__ == '__main__':
     blockchain = Blockchain()
-    blockchain.addBlock(data=[Vote('1','a').__dict__,Vote('1','b').__dict__])
-    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
-    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
-    blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
     blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
     blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
     blockchain.addBlock(data=[Vote('1','b').__dict__,Vote('1','a').__dict__])
