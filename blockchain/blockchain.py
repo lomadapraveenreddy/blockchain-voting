@@ -48,6 +48,13 @@ class Blockchain:
            lastBlock = ledger[i-1]
            Block.isValidBlock(lastBlock, block)
 
+    @staticmethod
+    def fromJson(jsonChain):
+
+        blockchain=Blockchain()
+        blockchain.ledger=list(map(lambda jsonBlock: Block.fromJson(jsonBlock),jsonChain))
+        return blockchain
+
     def toJson(self):
         '''
         Serializing the blockchain class.

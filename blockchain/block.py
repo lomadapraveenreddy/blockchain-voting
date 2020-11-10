@@ -95,6 +95,11 @@ class Block:
         '''
         return self.__dict__
 
+    @staticmethod
+    def fromJson(jsonData):
+        return Block(**jsonData)
+
+
 if __name__ == '__main__':
     print(Block.genesisBlock()==Block.genesisBlock())
     print(Block.isValidBlock(Block.genesisBlock(),Block.mineBlock(lastBlock=Block.genesisBlock(),data=[Vote('1','2').__dict__])))
