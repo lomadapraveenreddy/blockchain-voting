@@ -1,12 +1,13 @@
 import os
 import random
 import requests
-from flask import Flask,jsonify,request
+from flask import Flask,jsonify,request,render_template
 from blockchain.blockchain import Blockchain
+# from backend.app.src import blockchain
 from wallet.wallet import Wallet
 from wallet.transaction import Transaction
 from backend.pubsub import PubSub
-app = Flask(__name__)
+app = Flask(__name__,template_folder='src')
 
 blockchain =Blockchain()
 wallet = Wallet()
@@ -18,7 +19,8 @@ def routeDefault():
 
 @app.route('/blockchain')
 def routeBlockchain():
-    return jsonify(blockchain.toJson())
+    # return jsonify(blockchain.toJson())
+    return render_template("blockchain.html",ledger=blockchain.ledger)
 
 @app.route('/blockchain/mine')
 def routeBlockchainMine():

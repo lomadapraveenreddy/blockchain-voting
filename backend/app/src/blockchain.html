@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Ledgetr</title>
+</head>
+<body>
+    {% for block in ledger %}
+    <p>{{block.timestamp}}</p>
+    <p>{{block.data}}</p>
+    <p>{{block.hash}}</p>
+    <p>{{block.previousHash}}</p>
+    {% endfor %}
+</body>
+</html>
