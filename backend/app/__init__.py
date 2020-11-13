@@ -35,7 +35,8 @@ def routeBlockchainMine():
     blockMined=blockchain.ledger[-1]
     pubsub.broadcastBlock(blockMined)
     transactionPool.clearTransactionPool(blockchain.ledger)
-    return jsonify(blockMined.toJson())
+    #return jsonify(blockMined.toJson())
+    return render_template("blockchain_mine.html", blockmined=blockMined)
 
 @app.route('/wallet/transact',methods=['POST'])
 def route_Wallet_Transact():
@@ -44,7 +45,8 @@ def route_Wallet_Transact():
     if not transaction:
         transaction=Transaction(wallet,transactionData['pollID'],transactionData['option'])
         pubsub.broadcastTransaction(transaction)
-    return jsonify(transaction.toJson())
+    #return jsonify(transaction.toJson())
+    return render_template("wallet_transact", wallet_transact=transaction)
     
 
 
