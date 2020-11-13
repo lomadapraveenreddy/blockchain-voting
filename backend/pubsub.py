@@ -36,7 +36,8 @@ class Listener(SubscribeCallback):
                 print(f'\n-- Did not replace old ledger {e}.')
         elif messageObj.channel==CHANNELS['TRANSACTION']:
             receivedTransaction = Transaction.fromJson(messageObj.message)
-            self.transactionPool.setTransaction(receivedTransaction)
+            if receivedTransaction.transactionID not in self.transactionPool.transactionMap.keys():
+                self.transactionPool.setTransaction(receivedTransaction)
             print(f'\n-- Received transaction is set in transaction pool.')
 
 
