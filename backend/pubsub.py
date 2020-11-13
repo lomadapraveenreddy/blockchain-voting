@@ -32,6 +32,7 @@ class Listener(SubscribeCallback):
             newPotentialChain.append(receivedBlock)
             try:
                 self.blockchain.replaceLedger(newPotentialChain)
+                self.transactionPool.clearTransactionPool(self.blockchain.ledger)
             except Exception as e:
                 print(f'\n-- Did not replace old ledger {e}.')
         elif messageObj.channel==CHANNELS['TRANSACTION']:

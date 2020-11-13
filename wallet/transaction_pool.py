@@ -11,3 +11,13 @@ class TransactionPool:
         for transaction in self.transactionMap.values():
             if address == transaction.input['senderAddress']:
                 return transaction
+
+
+    def clearTransactionPool(self,ledger):
+
+        for block in ledger:
+            for transaction in block.data:
+                try:
+                    del self.transactionMap[transaction['transactionID']]
+                except KeyError:
+                    pass
