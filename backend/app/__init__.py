@@ -5,12 +5,15 @@ from flask import Flask,jsonify,request
 from blockchain.blockchain import Blockchain
 from wallet.wallet import Wallet
 from wallet.transaction import Transaction
+from wallet.transaction_pool import TransactionPool
 from backend.pubsub import PubSub
+
 app = Flask(__name__)
 
 blockchain =Blockchain()
 wallet = Wallet()
-pubsub = PubSub(blockchain)
+transactionPool = TransactionPool()
+pubsub = PubSub(blockchain,transactionPool)
 
 @app.route('/')
 def routeDefault():
@@ -23,6 +26,10 @@ def routeBlockchain():
 @app.route('/blockchain/mine')
 def routeBlockchainMine():
     data='foo'
+    transactionValues = transactionPool.transactionMap.values()
+    data = list(
+        map(lambda transaction: transaction.toJson(),transactionValues)
+    )
     blockchain.addBlock(data)
     blockMined=blockchain.ledger[-1]
     pubsub.broadcastBlock(blockMined)
@@ -31,7 +38,10 @@ def routeBlockchainMine():
 @app.route('/wallet/transact',methods=['POST'])
 def route_Wallet_Transact():
     transactionData=request.get_json()
-    transaction= Transaction(wallet,transactionData['pollID'],transactionData['option'])
+    # transaction= transactionPool.existingTransaction(wallet.address) 
+    # if transaction:
+    transaction=Transaction(wallet,transactionData['pollID'],transactionData['option'])
+    pubsub.broadcastTransaction(transaction)
     return jsonify(transaction.toJson())
     
 
