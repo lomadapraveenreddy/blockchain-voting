@@ -27,12 +27,14 @@ class Listener(SubscribeCallback):
         #print(f'\nChannel:{messageObj.channel}|Message:{messageObj.message}')
 
         if messageObj.channel == CHANNELS['BLOCK']:
+            print(f'\n-- new block is received.')
             receivedBlock = Block.fromJson(messageObj.message)
             newPotentialChain = self.blockchain.ledger[:]
             newPotentialChain.append(receivedBlock)
             try:
                 self.blockchain.replaceLedger(newPotentialChain)
                 self.transactionPool.clearTransactionPool(self.blockchain.ledger)
+                print(f'\n-- New block is added to the ledger')
             except Exception as e:
                 print(f'\n-- Did not replace old ledger {e}.')
         elif messageObj.channel==CHANNELS['TRANSACTION']:
