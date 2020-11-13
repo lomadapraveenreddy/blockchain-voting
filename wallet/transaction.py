@@ -6,10 +6,10 @@ class Transaction:
     """
     This has the data of the votes.
     """
-    def __init__(self,senderWallet,pollID,option):
-        self.transactionID = str(uuid.uuid4())[:8]
-        self.output=self.createOutput(pollID=pollID,option=option)
-        self.input = self.createInput(wallet=senderWallet,output=self.output)
+    def __init__(self,senderWallet=None,pollID=None,option=None,transactionID=None,output=None,input=None):
+        self.transactionID = transactionID or str(uuid.uuid4())[:8]
+        self.output= output or self.createOutput(pollID=pollID,option=option)
+        self.input = input or self.createInput(wallet=senderWallet,output=self.output)
     
     def createOutput(self,pollID,option):
         output={}
@@ -30,6 +30,16 @@ class Transaction:
         return self.__dict__
 
     @staticmethod
+    def fromJson(transactionJson):
+        
+        return Transaction(
+            transactionID=transactionJson['transactionID'],
+            output=transactionJson['output'],
+            input=transactionJson['input']
+        )
+
+
+    @staticmethod
     def isValidTransaction(transaction):
         '''
         validates and raises an exception if invalid.
@@ -40,10 +50,8 @@ class Transaction:
 
 def main():
     transaction= Transaction(Wallet(),'receip','1')
-    try:
-        print(Transaction.isValidTransaction(transaction))
-    except Exception as e:
-        print(f'exception {e}')
-
+    transactionJson= transaction.toJson()
+    restoredTransaction= transaction.fromJson(transactionJson)
+    print(restoredTransaction.__dict__)
 if __name__ == '__main__':
     main()

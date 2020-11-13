@@ -10,3 +10,4 @@ class TransactionPool:
 
         for transaction in self.transactionMap.values():
             if address == transaction.input['senderAddress']:
+                return transaction
