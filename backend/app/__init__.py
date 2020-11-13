@@ -17,7 +17,7 @@ pubsub = PubSub(blockchain,transactionPool)
 
 @app.route('/')
 def routeDefault():
-    return 'Welcome'
+    return render_template("index.html")
 
 @app.route('/blockchain')
 def routeBlockchain():
@@ -36,7 +36,7 @@ def routeBlockchainMine():
     pubsub.broadcastBlock(blockMined)
     transactionPool.clearTransactionPool(blockchain.ledger)
     return jsonify(blockMined.toJson())
-    return render_template("blockchain_mine.html", blockmined=blockMined)
+    #return render_template("blockchain_mine.html", blockmined=blockMined)
 
 @app.route('/wallet/transact',methods=['POST'])
 def route_Wallet_Transact():
